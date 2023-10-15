@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <h1>Insurance Details</h1>
+        <div class="shadow p-4 rounded">
+            <form method="post" enctype="multipart/form-data" action="{% url 'insurance' %}">
+                {% csrf_token %}
+
+                <!-- Insurance ID -->
+                <div class="form-group">
+                    <label for="insurance_id">Insurance ID:</label>
+                    <input type="text" class="form-control" id="insurance_id" name="insurance_id" required>
+                </div>
+
+                <!-- Coverage Type -->
+                <div class="form-group">
+                    <label for="coverage_type">Coverage Type:</label>
+                    <input type="text" class="form-control" id="coverage_type" name="coverage_type" required>
+                </div>
+
+                <!-- Start Date -->
+                <div class="form-group">
+                    <label for="start_date">Start Date:</label>
+                    <input type="date" class="form-control" id="start_date" name="start_date" required>
+                </div>
+
+                <!-- End Date -->
+                <div class="form-group">
+                    <label for="end_date">End Date:</label>
+                    <input type="date" class="form-control" id="end_date" name="end_date" required>
+                </div>
+
+                <!-- Insurance Coverage Amount -->
+                <div class="form-group">
+                    <label for="insurance_coverage_amount">Insurance Coverage Amount:</label>
+                    <input type="text" class="form-control" id="insurance_coverage_amount" name="insurance_coverage_amount" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

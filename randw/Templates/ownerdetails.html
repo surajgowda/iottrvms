@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <h1>Owner Details</h1>
+        <div class="shadow p-4 rounded">
+            <form method="post" enctype="multipart/form-data" action="{% url 'ownerdetails' %}">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+
+                <!-- Picture -->
+                <div class="form-group">
+                    <label for="picture">Picture:</label>
+                    <input type="file" class="form-control-file" id="picture" name="picture">
+                </div>
+
+                <!-- Aadhar Number -->
+                <div class="form-group">
+                    <label for="aadhar_number">Aadhar Number:</label>
+                    <input type="text" class="form-control" id="aadhar_number" name="aadhar_number" required>
+                </div>
+
+                <!-- Contact Number -->
+                <div class="form-group">
+                    <label for "contact_number">Contact Number:</label>
+                    <input type="text" class="form-control" id="contact_number" name="contact_number" required>
+                </div>
+
+                <!-- Address -->
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <textarea class="form-control" id="address" name="address" rows="4" required></textarea>
+                </div>
+
+                <!-- Model Name -->
+                <div class="form-group">
+                    <label for="model_name">Model Name:</label>
+                    <input type="text" class="form-control" id="model_name" name="model_name" required>
+                </div>
+
+                <!-- Color -->
+                <div class="form-group">
+                    <label for="color">Color:</label>
+                    <input type="text" class="form-control" id="color" name="color" required>
+                </div>
+
+                <!-- Year of Manufacture -->
+                <div class="form-group">
+                    <label for="year_of_manufacture">Year of Manufacture:</label>
+                    <input type="number" class="form-control" id="year_of_manufacture" name="year_of_manufacture" required>
+                </div>
+
+                <!-- Manufacturer -->
+                <div class="form-group">
+                    <label for="manufacturer">Manufacturer:</label>
+                    <input type="text" class="form-control" id="manufacturer" name="manufacturer" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit and Save</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2>List of Traffic Violations</h2>
+        <div class="table-responsive">
+          <table class="table table-striped" style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Act</th>
+                <th>Fine Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for violation in vio %}
+                <tr>
+                  <td>{{ violation.name }}</td>
+                  <td>{{ violation.act }}</td>
+                  <td>₹{{ violation.fine_amount }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

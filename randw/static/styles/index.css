@@ -1,0 +1,167 @@
+/* Reset some default styles */
+body, h1, h2, h3, p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Set a background color and font styles */
+  body {
+    background-color: #f8f8f8; /* Light gray background */
+    font-family: 'Roboto', sans-serif;
+    color: #333; /* Dark gray text */
+  }
+  
+  /* Style the header section */
+  .header_section {
+    background-color: #333; /* Dark background for the header */
+    color: #fff; /* White text */
+    padding: 10px 0;
+  }
+  
+  .header_top {
+    background-color: #222; /* Slightly darker background for top bar */
+    padding: 5px 0;
+  }
+  
+  .contact_nav a {
+    color: #fff;
+    margin-right: 20px;
+    text-decoration: none;
+  }
+  
+  /* Style the horizontal navbar */
+  .custom_nav-container {
+    background-color: #333; /* Dark background for the navbar */
+  }
+  
+  .navbar-brand {
+    color: #fff; /* White text for navbar brand */
+    font-weight: bold;
+    font-size: 24px;
+  }
+  
+  .navbar-toggler-icon {
+    background-color: #fff; /* White background for mobile menu icon */
+  }
+  
+  .navbar-collapse {
+    background-color: #333; /* Dark background for mobile menu */
+  }
+  
+  .nav-item {
+    margin-right: 20px;
+  }
+  
+  .nav-link {
+    color: #fff !important; /* White text for navigation links */
+  }
+  
+  /* Style the slider section */
+  .slider_section {
+    background-color: #fff; /* White background for slider section */
+    padding: 50px 0;
+  }
+  
+  .carousel-inner {
+    border-radius: 10px; /* Rounded corners for the slider */
+    overflow: hidden;
+  }
+  
+  .detail-box {
+    background-color: #333; /* Dark background for detail boxes */
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff; /* White text for details */
+  }
+  
+  /* Style the service section */
+  .service_section {
+    background-color: #f8f8f8; /* Light gray background for service section */
+    padding: 50px 0;
+  }
+  
+  .box {
+    background-color: #fff; /* White background for service boxes */
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  
+  /* Style the about section */
+  .about_section {
+    background-color: #fff; /* White background for about section */
+    padding: 50px 0;
+  }
+  
+  /* Style the track section */
+  .track_section {
+    background-color: #333; /* Dark background for track section */
+    color: #fff; /* White text for track section */
+    padding: 50px 0;
+  }
+  
+  /* Style the client section */
+  .client_section {
+    background-color: #f8f8f8; /* Light gray background for client section */
+    padding: 50px 0;
+  }
+  
+  .client_box {
+    background-color: #fff; /* White background for client boxes */
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  
+  /* Style the contact section */
+  .contact_section {
+    background-color: #333; /* Dark background for contact section */
+    color: #fff; /* White text for contact section */
+    padding: 50px 0;
+  }
+  
+  .contact-form input[type="text"],
+  .contact-form input[type="email"],
+  .contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .contact-form button {
+    background-color: #fff; /* White button background */
+    color: #333; /* Dark gray button text */
+    border: none;
+    padding: 15px 30px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  /* Style the footer section */
+  .footer_section {
+    background-color: #333; /* Dark background for footer section */
+    color: #fff; /* White text for footer */
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  /* Social media icons */
+  .info_social a {
+    color: #fff; /* White social media icons */
+    margin-right: 20px;
+    text-decoration: none;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .navbar-toggler-icon {
+      background-color: #fff; /* White background for mobile menu icon */
+    }
+  
+    .navbar-collapse {
+      background-color: #333; /* Dark background for mobile menu */
+    }
+  }
+  

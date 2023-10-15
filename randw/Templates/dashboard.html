@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">User Dashboard</h1>
+
+        <h2>Violation Details</h2>
+        <ul class="list-group">
+            <!-- Loop through violation data and populate list items -->
+            {% for violation in violation_data %}
+                <li class="list-group-item">
+                    <strong>Violation Date:</strong> {{ violation.violation_date }}<br>
+                    <strong>Type:</strong> {{ violation.violation_id }}<br>
+                    <strong>Fine Amount:</strong> ₹{{ violation.fine_amount }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h2>Owner Details</h2>
+        <ul class="list-group">
+            <!-- Loop through owner details data and populate list items -->
+            {% for owner in owner_details_data %}
+                <li class="list-group-item">
+                    <strong>Name:</strong> {{ owner.name }}<br>
+                    <strong>Address:</strong> {{ owner.address }}<br>
+                    <strong>Contact:</strong> {{ owner.contact_number }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h2>Insurance Details</h2>
+        <ul class="list-group">
+            <!-- Loop through insurance data and populate list items -->
+            {% for insurance in insurance_data %}
+                <li class="list-group-item">
+                    <strong>Policy Number:</strong> {{ insurance.insurance_id }}<br>
+                    <strong>Coverage Type:</strong> {{ insurance.coverage_type }}<br>
+                    <strong>Expiration Date:</strong> {{ insurance.end_date }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h2>Registration Details</h2>
+        <ul class="list-group">
+            <!-- Loop through registration data and populate list items -->
+            {% for registration in registration_data %}
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>Vehicle Number:</strong> {{ registration.chassis_number }}<br>
+                        <strong>Registration Date:</strong> {{ registration.engine_number }}
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Owner Name:</strong> {{ registration.uuid.name }}<br>
+                        <strong>Date of Expiry:</strong> {{ registration.date_of_expiry }}
+                    </div>
+                </div>
+            </li>
+            
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}
