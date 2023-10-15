@@ -1,4 +1,5 @@
 import json
+from django.http import JsonResponse
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
@@ -11,11 +12,12 @@ from django.contrib import messages
 from .models import RegistrationCertificate, OwnerDetails
 from django.shortcuts import render
 from .models import OwnerDetails, VehicleViolationHistory, Insurance, RegistrationCertificate
-from rest_framework import status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+import datetime
+# from rest_framework import status
+# from rest_framework.decorators import api_view
+# from rest_framework.response import Response
 from .models import VehicleLocation
-from serializers import VehicleLocationSerializer
+# from .serializers import VehicleLocationSerializer
 
 
 def home(request):
@@ -24,43 +26,21 @@ def home(request):
 def about(request):
     return render(request,"about.html")
 
-@api_view(['POST'])
-def save_vehicle_location(request):
-    if request.method == 'POST':
-        serializer = VehicleLocationSerializer(data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-def vehicleviolation(data):
-    uuid = data.get('uuid')
-    user = User.objects.get(username= uuid)
-    violation_id= ViolationList.objects.get(violation_id= data['violation_id'])
-    Fine = data.get('Fine')
-    date = data.get('date')
-    print(uuid)
-    violation = VehicleViolationHistory(uuid = user,violation_id = violation_id,fine_amount = Fine,violation_date = date)
-    violation.save()
-
+# @api_view(['POST'])
+# def save_vehicle_location(request):
+#     if request.method == 'POST':
+#         serializer = VehicleLocationSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def user(request):
     user_id = request.user.id  # Get the user's ID
-
-    # Retrieve the owner details associated with the user
     owner_details = OwnerDetails.objects.filter(uuid=user_id)
-
-    # Retrieve vehicle violation history for the user
     violations = VehicleViolationHistory.objects.all()
-
-    # Retrieve insurance details for the user
     insurance_details = Insurance.objects.all()
-
-    # Retrieve registration details for the user
     registration_details = RegistrationCertificate.objects.all()
-    print(violations, insurance_details)
-    # Pass the data to the template
     return render(request, 'dashboard.html', {
         'violation_data': violations,
         'owner_details_data': owner_details,
@@ -243,12 +223,117 @@ def insurance(request):
 
     return render(request, 'insurance.html')
 
-    
-
-
 
 def logout_view(request):
     # Use Django's built-in logout function to log out the user
     logout(request)
     # Redirect to the homepage or any other desired page
     return redirect('login')  # Replace 'home' with the name of the URL pattern for your homepage
+
+# ----------------------------------------API--------------------------------------------------
+
+def vloc(request):
+    if request.method=='POST':
+        request_body = request.body.decode('utf-8')
+        data = json.loads(request_body)
+        uuid = data.get('uuid')
+        lat = data.get('lat')
+        long = data.get('long')
+        owner_details = OwnerDetails.objects.get(uuid=uuid)
+        vehicle_location = VehicleLocation(
+                uuid=owner_details,
+                time=datetime.datetime.now().time(),
+                date=datetime.date.today(),
+                location_latitude=lat,
+                location_longitude=long
+            )
+        vehicle_location.save()
+        
+        return HttpResponse('Done')
+    else:
+        pass
+    
+def vacc(request):
+    if request.method=='POST':
+        request_body = request.body.decode('utf-8')
+        data = json.loads(request_body)
+        uuid = data.get('uuid')
+        owner_details = OwnerDetails.objects.get(uuid=uuid)
+        lat = data.get('lat')
+        long = data.get('long')
+        
+        vehicle_accident = VehicleAccident(
+                uuid=owner_details,
+                location_latitude=lat,
+                location_longitude=long,
+                time=datetime.datetime.now().time()
+            )
+        vehicle_accident.save()     
+               
+        return HttpResponse('Done')
+    else:
+        pass
+
+def vstbt(request):
+    if request.method=='POST':
+        request_body = request.body.decode('utf-8')
+        data = json.loads(request_body)
+        uuid = data.get('uuid')
+        owner_details = OwnerDetails.objects.get(uuid=uuid)
+        violist = ViolationList.objects.all(violation_id = 3)
+        vehicle_violation = VehicleViolationHistory(
+                uuid=owner_details,
+                violation_date=datetime.datetime.now().time(),
+                fine_amount=violist.fine_amount,
+                violation_id = violist 
+            )
+
+        vehicle_violation.save()
+               
+        return HttpResponse('Done')
+    else:
+        pass
+
+def vspd(request):
+    if request.method=='POST':
+        request_body = request.body.decode('utf-8')
+        data = json.loads(request_body)
+        uuid = data.get('uuid')
+        owner_details = OwnerDetails.objects.get(uuid=uuid)
+        violist = ViolationList.objects.all(violation_id = 1)
+        vehicle_violation = VehicleViolationHistory(
+                uuid=owner_details,
+                violation_date=datetime.datetime.now().time(),
+                fine_amount=violist.fine_amount,
+                violation_id = violist 
+            )
+        vehicle_violation.save()
+               
+        return HttpResponse('Done')
+    else:
+        pass
+
+def vrfid(request):
+    if request.method=='POST':
+        request_body = request.body.decode('utf-8')
+        data = json.loads(request_body)
+        uuid = data.get('uuid')
+        owner_details = OwnerDetails.objects.get(uuid=uuid)
+        violist = ViolationList.objects.all(violation_id = 2)
+        vehicle_violation = VehicleViolationHistory(
+                uuid=owner_details,
+                violation_date=datetime.datetime.now().time(),
+                fine_amount=violist.fine_amount,
+                violation_id = violist 
+            )
+        vehicle_violation.save()
+               
+        return HttpResponse('Done')
+    else:
+        pass
+    
+
+
+        
+
+

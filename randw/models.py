@@ -16,7 +16,7 @@ class ViolationList(models.Model):
     fine_amount = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return self.name
+        return str(self.violation_id)
 
 class OwnerDetails(models.Model):
     uuid = models.IntegerField(unique=True)
@@ -39,6 +39,7 @@ class VehicleViolationHistory(models.Model):
     fine_amount = models.DecimalField(max_digits=10, decimal_places=2)
     violation_id = models.ForeignKey('ViolationList', on_delete=models.CASCADE)  # No need for quotes
 
+
 class VehicleLocation(models.Model):
     uuid = models.ForeignKey('OwnerDetails', on_delete=models.CASCADE)  # Use 'CustomUser' instead of 'User'
     time = models.TimeField()
@@ -47,7 +48,7 @@ class VehicleLocation(models.Model):
     location_longitude = models.DecimalField(max_digits=9, decimal_places=6)
 
     def __str__(self):
-        return f"Location for {self.uuid.username} at {self.date} {self.time}"
+        return f"Location for {self.uuid.name} at {self.date} {self.time}"
 
 class VehicleAccident(models.Model):
     uuid = models.ForeignKey('OwnerDetails', on_delete=models.CASCADE)  # Use 'CustomUser' instead of 'User'
