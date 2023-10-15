@@ -15,7 +15,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import VehicleLocation
-from .serializers import VehicleLocationSerializer
+from serializers import VehicleLocationSerializer
 
 
 def home(request):
@@ -34,6 +34,15 @@ def save_vehicle_location(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+def vehicleviolation(data):
+    uuid = data.get('uuid')
+    user = User.objects.get(username= uuid)
+    violation_id= ViolationList.objects.get(violation_id= data['violation_id'])
+    Fine = data.get('Fine')
+    date = data.get('date')
+    print(uuid)
+    violation = VehicleViolationHistory(uuid = user,violation_id = violation_id,fine_amount = Fine,violation_date = date)
+    violation.save()
 
 
 def user(request):

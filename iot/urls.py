@@ -28,6 +28,7 @@ urlpatterns = [
     path('service/',views.service,name = 'service'),
     path('Registration/',views.registration, name = 'registration' ),
     path('login/',views.login_view, name = 'login'),
+    path('iotdata/',views.vehicleviolation,name = 'iotdata'),
     path('logout/', views.logout_view, name='logout'),
     path('violationlist', views.violationlist, name='vlist'),
     path('ownerdetails/', views.ownerdetails, name='ownerdetails'),
