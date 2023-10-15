@@ -9,7 +9,14 @@ from django.contrib import messages
 from .models import CustomUser
 from django.contrib import messages
 from .models import RegistrationCertificate, OwnerDetails
-from .models import OwnerDetails
+from django.shortcuts import render
+from .models import OwnerDetails, VehicleViolationHistory, Insurance, RegistrationCertificate
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import VehicleLocation
+from .serializers import VehicleLocationSerializer
+
 
 def home(request):
     return render(request,"index.html")
@@ -17,34 +24,17 @@ def home(request):
 def about(request):
     return render(request,"about.html")
 
-def iotdata(request):
-    data = json.loads(request.body)
-    vehicleaccident(data)
-    vehicleviolation(data)
+@api_view(['POST'])
+def save_vehicle_location(request):
+    if request.method == 'POST':
+        serializer = VehicleLocationSerializer(data=request.data)
 
-def vehicleaccident(data):
-    uuid = data.get('uuid')
-    user = User.objects.get(username= uuid)
-    location_latitude = data.get('latitude')
-    location_longitude = data.get('longitude')
-    date = data.get('date')
-    print(date)
-    accident = VehicleAccident(uuid= user, location_latitude=location_latitude, location_longitude=location_longitude, time=date)
-    accident.save()
-    
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-def vehicleviolation(data):
-    uuid = data.get('uuid')
-    user = User.objects.get(username= uuid)
-    violation_id = data.get('violation_id')
-    Fine = data.get('Fine')
-    date = data.get('date')
 
-    violation = VehicleViolationHistory(uuid = user,violation_id = violation_id,Fine = Fine,violation_date = date)
-    violation.save()
-
-from django.shortcuts import render
-from .models import OwnerDetails, VehicleViolationHistory, Insurance, RegistrationCertificate
 
 def user(request):
     user_id = request.user.id  # Get the user's ID

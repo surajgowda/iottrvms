@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from randw import views
+from randw.views import save_vehicle_location
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home,name = 'home'),
@@ -27,12 +28,12 @@ urlpatterns = [
     path('service/',views.service,name = 'service'),
     path('Registration/',views.registration, name = 'registration' ),
     path('login/',views.login_view, name = 'login'),
-    path('iotdata/',views.iotdata,name = 'iotdata'),
     path('logout/', views.logout_view, name='logout'),
     path('violationlist', views.violationlist, name='vlist'),
     path('ownerdetails/', views.ownerdetails, name='ownerdetails'),
     path('regiscert/', views.registrationcert, name='regiscert'),
     path('insurance/', views.insurance, name='insurance'),
+    path('api/save-vehicle-location/', save_vehicle_location, name='save-vehicle-location'),
 
 ]
 
