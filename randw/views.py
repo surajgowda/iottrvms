@@ -13,6 +13,7 @@ from .models import RegistrationCertificate, OwnerDetails
 from django.shortcuts import render
 from .models import OwnerDetails, VehicleViolationHistory, Insurance, RegistrationCertificate
 import datetime
+from django.views.decorators.csrf import csrf_exempt
 # from rest_framework import status
 # from rest_framework.decorators import api_view
 # from rest_framework.response import Response
@@ -231,7 +232,7 @@ def logout_view(request):
     return redirect('login')  # Replace 'home' with the name of the URL pattern for your homepage
 
 # ----------------------------------------API--------------------------------------------------
-
+@csrf_exempt
 def vloc(request):
     if request.method=='POST':
         request_body = request.body.decode('utf-8')
@@ -253,6 +254,7 @@ def vloc(request):
     else:
         pass
     
+@csrf_exempt
 def vacc(request):
     if request.method=='POST':
         request_body = request.body.decode('utf-8')
@@ -273,7 +275,9 @@ def vacc(request):
         return HttpResponse('Done')
     else:
         pass
+    
 
+@csrf_exempt
 def vstbt(request):
     if request.method=='POST':
         request_body = request.body.decode('utf-8')
@@ -294,6 +298,7 @@ def vstbt(request):
     else:
         pass
 
+@csrf_exempt
 def vspd(request):
     if request.method=='POST':
         request_body = request.body.decode('utf-8')
@@ -313,6 +318,7 @@ def vspd(request):
     else:
         pass
 
+@csrf_exempt
 def vrfid(request):
     if request.method=='POST':
         request_body = request.body.decode('utf-8')
